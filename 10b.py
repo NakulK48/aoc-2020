@@ -21,8 +21,7 @@ options_by_run_length = {0: 1}
 all_runs = []
 current_run = 0
 
-# First, we see how high we need to calculate - how long is the longest run?
-# (it's only 4, which is disappointing - that's pretty easy to work out manually)
+# First, we calculate all the run lengths.
 
 for adapter in lines:
     diff = adapter - prev
@@ -34,6 +33,7 @@ for adapter in lines:
 
     prev = adapter 
 
+# (it's only 4, which is disappointing - that's pretty easy to work out manually)
 max_run = max(all_runs)
 
 # To get the number of combinations for a given run length, we build up iteratively
