@@ -5,22 +5,21 @@ with open("13.txt") as file_obj:
 
 bus_offsets = lines[1].split(",")
 
-bus_to_offset = {index: int(bus) for index, bus in enumerate(bus_offsets) if bus != "x"}
-
-modulos = []
-
-for offset, bus in bus_to_offset.items():
+def get_modulo(bus_str, offset):
+    bus = int(bus_str)
     modulo = bus - (offset % bus)
-    if modulo == bus:
-        modulo = 0
-    modulos.append((bus, modulo))
+    return (bus, 0 if modulo == bus else modulo)
+
+modulos = [
+    get_modulo(bus, offset) for offset, bus in enumerate(bus_offsets) if bus != "x"
+]
 
 modulos.sort(reverse=True)
 
-to_add, current = modulos[0]
-
 def lcm(a, b):
     return abs(a*b) // math.gcd(a, b)
+
+to_add, current = modulos[0]
 
 for bus, modulo in modulos[1:]:
     while True:
