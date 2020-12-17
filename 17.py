@@ -1,24 +1,31 @@
 with open("17.txt") as file_obj:
     lines = [line.strip() for line in file_obj.readlines()]
 
-SIDE_LENGTH = 30
-MIDDLE = 15
-THIRD = 10
+ITERATIONS = 6
 
-def build_cube(side_length):
+initial_side_length = len(lines)
+
+XY_LENGTH = initial_side_length + (ITERATIONS * 2)
+Z_LENGTH =  1 + (ITERATIONS * 2)
+
+XY_START = XY_LENGTH // 3
+Z_START = Z_LENGTH // 2
+
+def build_cube():
     return [
-        [[0 for _ in range(side_length)]
-        for __ in range(side_length)]
-        for ___ in range(side_length) 
+        [
+            [0 for _ in range(Z_LENGTH)]
+            for __ in range(XY_LENGTH)
+        ]
+        for ___ in range(XY_LENGTH) 
     ]
 
-cube = build_cube(SIDE_LENGTH)
+cube = build_cube()
 
 for x, line in enumerate(lines):
     for y, value in enumerate(line):
         if value == "#":
-            cube[MIDDLE][x + THIRD][y + THIRD] = 1
-
+            cube[x + XY_START][y + XY_START][Z_START] = 1
 
 def iterate_cell(cube, x, y, z):
     active_neighbours = 0
@@ -41,11 +48,12 @@ def iterate_cell(cube, x, y, z):
 ITERATIONS = 6
 
 for iteration in range(ITERATIONS):
-    new_cube = build_cube(SIDE_LENGTH)
+    print("ITERATION", iteration+1)
+    new_cube = build_cube()
     total_active = 0
-    for x in range(SIDE_LENGTH):
-        for y in range(SIDE_LENGTH):
-            for z in range(SIDE_LENGTH):
+    for x in range(XY_LENGTH):
+        for y in range(XY_LENGTH):
+            for z in range(Z_LENGTH):
                 new_cell = iterate_cell(cube, x, y, z)
                 total_active += new_cell
                 new_cube[x][y][z] = new_cell
