@@ -8,7 +8,7 @@ initial_side_length = len(lines)
 XY_LENGTH = initial_side_length + (ITERATIONS * 2)
 Z_LENGTH =  1 + (ITERATIONS * 2)
 
-XY_START = XY_LENGTH // 3
+XY_START = ITERATIONS
 Z_START = Z_LENGTH // 2
 
 def build_cube():
