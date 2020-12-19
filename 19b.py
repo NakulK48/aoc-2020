@@ -13,17 +13,7 @@ for line in rule_lines:
     rule_id, raw_rule = line.split(": ")
     raw_rules[rule_id] = raw_rule
 
-# raw_rules["8"] = "42 | 42 8"
-# raw_rules["11"] = "42 31 | 42 11 31"
-
 parsed_rules = {}
-
-# 42 = a
-# 31 = b
-# ab
-# aabb
-# aaabbb
-
 
 def parse(raw):
     if raw == "8":
