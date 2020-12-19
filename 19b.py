@@ -29,9 +29,6 @@ def parse(raw):
     if raw in parsed_rules:
         return parsed_rules[raw]
 
-    elif raw == "11":
-        pass
-
     if raw.startswith('"'):
         return raw.replace('"', '')
 
@@ -39,6 +36,7 @@ def parse(raw):
     if len(or_branches) == 2:
         left, right = or_branches
         return f"({parse(left)}|{parse(right)})"
+
     and_branches = raw.split(" ")
     if len(and_branches) == 2:
         left, right = and_branches
